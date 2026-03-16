@@ -50,15 +50,12 @@ let crop_and_save = async (image_uri, rect, dpr) => {
   )
 
   let final_blob = await canvas.convertToBlob({type: `image/png`})
-  let reader = new FileReader()
+  let blob_url = URL.createObjectURL(final_blob)
 
-  reader.onloadend = () => {
-    let download_options = {
-      url: reader.result,
-      filename: `grasshopper_capture_${Date.now()}.png`
-    }
-    browser.downloads.download(download_options)
+  let download_options = {
+    url: blob_url,
+    filename: `grasshopper_capture_${Date.now()}.png`
   }
 
-  reader.readAsDataURL(final_blob)
+  browser.downloads.download(download_options)
 }
