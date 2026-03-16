@@ -30,5 +30,15 @@
       "512": "icon_512.png"
     },
     "default_title": "Beermusic"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "beermusic@dat.rabbit",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
   }
 }
