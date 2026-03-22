@@ -4,7 +4,6 @@ browser.action.onClicked.addListener((tab) => {
 })
 
 browser.runtime.onMessage.addListener((message, sender) => {
-
   if (message.action === `process_capture`) {
     let capture_options = {format: `png`}
 
@@ -19,12 +18,10 @@ let crop_and_save = async (image_uri, rect, dpr) => {
   let response = await fetch(image_uri)
   let blob = await response.blob()
   let img = await createImageBitmap(blob)
-
   let physical_x = Math.round(rect.x * dpr)
   let physical_y = Math.round(rect.y * dpr)
   let physical_width = Math.round(rect.width * dpr)
   let physical_height = Math.round(rect.height * dpr)
-
   let safe_x = Math.max(0, physical_x)
   let safe_y = Math.max(0, physical_y)
   let safe_width = Math.min(physical_width, img.width - safe_x)
