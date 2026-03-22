@@ -3,7 +3,7 @@ let highlighted_element = null
 let scale_factor = 4
 let render_delay_ms = 500
 let style_tag = document.createElement(`style`)
-style_tag.textContent = `.grasshopper-highlight { outline: 3px solid #ff0044 !important; cursor: crosshair !important; box-sizing: border-box !important; } .grasshopper-no-scroll, .grasshopper-no-scroll * { scrollbar-width: none !important; } .grasshopper-no-scroll::-webkit-scrollbar, .grasshopper-no-scroll *::-webkit-scrollbar { display: none !important; }`
+style_tag.textContent = `.grasshopper-highlight { outline: 3px solid #ff0044 !important; cursor: crosshair !important; box-sizing: border-box !important; } .grasshopper-no-scroll, .grasshopper-no-scroll * { scrollbar-width: none !important; } .grasshopper-no-scroll::-webkit-scrollbar, .grasshopper-no-scroll *::-webkit-scrollbar { display: none !important; } .grasshopper-no-pointer, .grasshopper-no-pointer * { pointer-events: none !important; }`
 document.head.appendChild(style_tag)
 
 let get_opaque_background = (node) => {
@@ -61,6 +61,7 @@ let capture_upscaled_node = async (target_node) => {
   let translate_x = -unscaled_rect.left
   let translate_y = -unscaled_rect.top
   document.documentElement.classList.add(`grasshopper-no-scroll`)
+  document.documentElement.classList.add(`grasshopper-no-pointer`)
 
   target_node.style.transition = `none`
   target_node.style.position = `relative`
@@ -90,6 +91,7 @@ let capture_upscaled_node = async (target_node) => {
   target_node.style.zIndex = original_z_index
   target_node.style.position = original_position
   document.documentElement.classList.remove(`grasshopper-no-scroll`)
+  document.documentElement.classList.remove(`grasshopper-no-pointer`)
 
   for (let i = 0; i < ancestors.length; i++) {
     let anc = ancestors[i]
